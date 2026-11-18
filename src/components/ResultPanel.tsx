@@ -137,18 +137,18 @@ export default function ResultPanel({
   };
 
   return (
-    <div className="flex gap-6 h-full">
+    <div className="flex gap-6">
       {/* Left: photo preview */}
-      <div className="flex-1 flex flex-col min-w-0">
-        <div className="relative aspect-[3/2] bg-gray-800 rounded-xl overflow-hidden border-2 border-amber-500/30 shadow-2xl shadow-amber-500/20">
+      <div className="flex-1 min-w-0">
+        <div className="relative bg-gray-800 rounded-xl overflow-hidden border-2 border-amber-500/30 shadow-2xl shadow-amber-500/20">
           {isProcessing ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900/95">
+            <div className="aspect-[3/2] flex flex-col items-center justify-center bg-gray-900/95">
               <Loader2 className="w-16 h-16 text-amber-400 animate-spin mb-4" />
               <p className="text-amber-400 text-lg font-semibold">{processingText}</p>
               <p className="text-gray-400 text-sm mt-2">This may take a few moments</p>
             </div>
           ) : (
-            <div className="absolute inset-0">
+            <>
               <div className="overflow-hidden" style={frameWindowStyle}>
                 <img
                   src={activeImage}
@@ -160,9 +160,9 @@ export default function ResultPanel({
                 src={frameConfig.path}
                 alt=""
                 aria-hidden="true"
-                className="absolute inset-0 w-full h-full object-fill pointer-events-none select-none"
+                className="relative block w-full h-auto pointer-events-none select-none"
               />
-            </div>
+            </>
           )}
         </div>
 
@@ -180,7 +180,7 @@ export default function ResultPanel({
 
       {/* Right: controls */}
       {!isProcessing && (
-        <div className="w-64 flex-shrink-0 flex flex-col gap-5">
+        <div className="w-64 flex-shrink-0 flex flex-col gap-5 self-start">
           {/* Frame selector */}
           <div>
             <p className="text-amber-400 font-semibold text-sm mb-2">Choose Your Frame</p>

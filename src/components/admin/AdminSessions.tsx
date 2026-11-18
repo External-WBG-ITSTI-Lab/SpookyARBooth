@@ -22,16 +22,19 @@ type FrameOption = 'Gratitude1' | 'Gratitude2';
 const FRAME_CONFIGS: Record<FrameOption, {
   path: string;
   label: string;
+  aspectRatio: string;
   window: { widthRatio: number; heightRatio: number; offsetXRatio: number; offsetYRatio: number };
 }> = {
   Gratitude1: {
     path: '/Gratitude1.png',
     label: 'Gratitude (Autumn)',
+    aspectRatio: '3/2',
     window: { widthRatio: 0.84, heightRatio: 0.73, offsetXRatio: 0, offsetYRatio: 0.03 },
   },
   Gratitude2: {
     path: '/Gratitude2.png',
     label: 'Gratitude (Classic)',
+    aspectRatio: '4/3',
     window: { widthRatio: 0.88, heightRatio: 0.7, offsetXRatio: 0, offsetYRatio: 0.0 },
   },
 };
@@ -192,24 +195,19 @@ export default function AdminSessions() {
             )}
 
             {/* Photo display */}
-            <div className="rounded-xl overflow-hidden bg-black aspect-[3/2] relative">
-              {view === 'original' && (
+            {view !== 'framed' ? (
+              <div className="rounded-xl overflow-hidden bg-black aspect-[3/2] relative">
                 <img
-                  src={selected.originalUrl ?? ''}
-                  alt="Original photo"
+                  src={(view === 'original' ? selected.originalUrl : selected.generatedUrl) ?? ''}
+                  alt={view === 'original' ? 'Original photo' : 'Generated photo'}
                   className="w-full h-full object-contain"
                 />
-              )}
-
-              {view === 'generated' && (
-                <img
-                  src={selected.generatedUrl ?? ''}
-                  alt="Generated photo"
-                  className="w-full h-full object-contain"
-                />
-              )}
-
-              {view === 'framed' && (
+              </div>
+            ) : (
+              <div
+                className="rounded-xl overflow-hidden bg-black relative"
+                style={{ aspectRatio: frameConfig.aspectRatio }}
+              >
                 <div className="absolute inset-0">
                   <div style={frameWindowStyle}>
                     <img
@@ -225,8 +223,8 @@ export default function AdminSessions() {
                     className="absolute inset-0 w-full h-full object-fill pointer-events-none select-none"
                   />
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}

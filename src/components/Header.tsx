@@ -1,15 +1,17 @@
 import { Leaf, Cpu, LogOut, UserCircle, LayoutDashboard } from 'lucide-react';
 import type { ThemeConfig } from '../themes';
+import { THEME_OPTIONS, type ThemeId } from '../themes';
 
 type HeaderProps = {
   username?: string;
   role?: 'admin' | 'user' | null;
   onLogout?: () => void;
   onAdminClick?: () => void;
+  onThemeChange?: (themeId: ThemeId) => void;
   themeConfig: ThemeConfig;
 };
 
-export default function Header({ username, role, onLogout, onAdminClick, themeConfig }: HeaderProps) {
+export default function Header({ username, role, onLogout, onAdminClick, onThemeChange, themeConfig }: HeaderProps) {
   const { colors } = themeConfig;
   const LogoIcon = themeConfig.id === 'oix_ainative_2026' ? Cpu : Leaf;
 
@@ -24,6 +26,21 @@ export default function Header({ username, role, onLogout, onAdminClick, themeCo
             <h1 className={`text-sm font-semibold ${colors.textPrimary}`}>{themeConfig.orgLabel}</h1>
             <p className={`text-xs ${colors.textSecondary}`}>{themeConfig.boothLabel}</p>
           </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {onThemeChange && (
+            <select
+              value={themeConfig.id}
+              onChange={(e) => onThemeChange(e.target.value as ThemeId)}
+              className="bg-gray-800 border border-gray-600 text-gray-200 text-xs rounded-lg px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-gray-500"
+              title="Dev: switch theme"
+            >
+              {THEME_OPTIONS.map((t) => (
+                <option key={t.id} value={t.id}>{t.label}</option>
+              ))}
+            </select>
+          )}
         </div>
 
         {username && (

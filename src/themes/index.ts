@@ -9,6 +9,7 @@ export interface ThemeEffect {
 export interface ThemeFrame {
   path: string;
   label: string;
+  aspectRatio: string;
   window: {
     widthRatio: number;
     heightRatio: number;
@@ -74,11 +75,13 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
       Gratitude1: {
         path: '/Gratitude1.png',
         label: 'Gratitude (Autumn)',
+        aspectRatio: '3/2',
         window: { widthRatio: 0.84, heightRatio: 0.73, offsetXRatio: 0, offsetYRatio: 0.03 },
       },
       Gratitude2: {
         path: '/Gratitude2.png',
         label: 'Gratitude (Classic)',
+        aspectRatio: '4/3',
         window: { widthRatio: 0.88, heightRatio: 0.70, offsetXRatio: 0, offsetYRatio: 0.0 },
       },
     },
@@ -130,7 +133,8 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
       OIX1: {
         path: '/OIX1.png',
         label: 'OIX Frame',
-        window: { widthRatio: 0.90, heightRatio: 0.67, offsetXRatio: 0, offsetYRatio: -0.02 },
+        aspectRatio: '4/3',
+        window: { widthRatio: 0.96, heightRatio: 0.77, offsetXRatio: 0, offsetYRatio: 0.0 },
       },
     },
     defaultFrame: 'OIX1',

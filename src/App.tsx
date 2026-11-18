@@ -145,7 +145,7 @@ function App() {
   }
 
   const effectiveUsername = isAuthDisabled ? username ?? 'Local Tester' : username ?? undefined;
-  const effectiveRole = isAuthDisabled ? (role ?? null) : role;
+  const effectiveRole = isAuthDisabled ? (role ?? 'admin') : role;
 
   if (page === 'admin') {
     return <AdminDashboard onBack={() => setPage('photobooth')} />;
@@ -160,6 +160,7 @@ function App() {
         role={effectiveRole}
         onLogout={isAuthDisabled ? undefined : handleLogout}
         onAdminClick={() => setPage('admin')}
+        onThemeChange={isAuthDisabled ? (id) => { setTheme(id); setSelectedEffect(getTheme(id).effects[0]?.id ?? ''); } : undefined}
         themeConfig={themeConfig}
       />
 
