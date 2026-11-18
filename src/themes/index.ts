@@ -129,8 +129,8 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
     frames: {
       OIX1: {
         path: '/OIX1.png',
-        label: 'Innovation Frame',
-        window: { widthRatio: 0.88, heightRatio: 0.70, offsetXRatio: 0, offsetYRatio: 0.0 },
+        label: 'OIX Frame',
+        window: { widthRatio: 0.90, heightRatio: 0.67, offsetXRatio: 0, offsetYRatio: -0.02 },
       },
     },
     defaultFrame: 'OIX1',
